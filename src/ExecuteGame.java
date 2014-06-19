@@ -78,7 +78,7 @@ public class ExecuteGame {
                 out.print(player2.getName());
         }
 
-        out.println(" wins!");
+        out.println(" wins!!");
     }
     private void changeTurn() {
         playerToMove = (playerToMove == PlayerToken.PLAYER1) ? PlayerToken.PLAYER2 : PlayerToken.PLAYER1;
