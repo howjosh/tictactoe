@@ -2,13 +2,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class TicTacToeBoardTest {
 
@@ -24,7 +21,7 @@ public class TicTacToeBoardTest {
 
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
-        board = new TicTacToeBoard(printStream, reader);
+        board = new TicTacToeBoard();
         player1 = new Player("X", "Player 1", printStream, reader);
         player2 = new Player("O", "Player 2", printStream, reader);
 

@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by joshuahowell on 6/18/14.
@@ -13,20 +10,20 @@ public class TicTacToeBoard{
 
     private Set<Integer> player1;
     private Set<Integer> player2;
-    private PrintStream out;
-    private BufferedReader reader;
 
     private Map<Integer, String[]> winningCombinations;
 
+    private List<String> board;
     private boolean gameWon;
-    public TicTacToeBoard(PrintStream out, BufferedReader reader){
+
+    public final int NUMBEROFSPACES = 10;
+    public TicTacToeBoard(){
 
         player1 = new HashSet<Integer>();
         player2 = new HashSet<Integer>();
 
-        this.out = out;
-        this.reader = reader;
 
+        board = new ArrayList<String>(NUMBEROFSPACES);
         gameWon = false;
 
         winningCombinations = new HashMap<Integer, String[]>();
@@ -95,6 +92,13 @@ public class TicTacToeBoard{
 
     public void addPiece(Player player, Integer move){
 
+        int space = move.intValue();
+
+        board.add(space, player.getPiece());
+        checkWin(player, move);
+
+
+/*
         if(player.getName().equals("Player 1") ) {
             player1.add(move);
             gameWon = checkWin(player, move);
@@ -104,23 +108,24 @@ public class TicTacToeBoard{
         else{
             player2.add(move);
             gameWon = checkWin(player, move);
-        }
+        }*/
     }
 
 
     private boolean checkWin(Player player, Integer move){
 
+        String piece = player.getPiece();
         String possibleWins[] = winningCombinations.get(move);
 
-        for(String winningCombo : possibleWins)
-            out.println(winningCombo + " ");
 
-        out.println();
+        for(String winningCombo : possibleWins){
 
-        for(String winningCombo : possibleWins)
-            if(checkPlayersList(player, winningCombo))
+        }
+
+       /* for(String winningCombo : possibleWins) {
+            if (checkPlayersList(player, winningCombo))
                 return true;
-
+        }*/
 
 
 

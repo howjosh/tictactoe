@@ -37,5 +37,12 @@ public class Player {
         return piece;
     }
 
+    public boolean equals(Object _otherPlayer){
+        Player otherPlayer = (Player)_otherPlayer;
+
+        return name.equals(((Player) otherPlayer).getName()) && piece.equals(otherPlayer.getPiece());
+
+    }
+
 
 }

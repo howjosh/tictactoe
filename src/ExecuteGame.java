@@ -9,10 +9,7 @@ public class ExecuteGame {
     private Player player1, player2;
     private TicTacToeBoard board;
 
-
-    private enum PlayerToken {PLAYER1, PLAYER2};
-    private PlayerToken playerToMove;
-    private String winner = "";
+    private Player playerToMove;
 
     PrintStream out;
 
@@ -24,7 +21,7 @@ public class ExecuteGame {
         this.player2 = player2;
 
 
-        playerToMove = PlayerToken.PLAYER1;
+        playerToMove = this.player1;
 
         out = printStream;
 
@@ -41,12 +38,7 @@ public class ExecuteGame {
 
     public void makeMove() throws IOException {
 
-        if(playerToMove == PlayerToken.PLAYER1 )
-           makeMove(player1);
-
-        else
-            makeMove(player2);
-
+        makeMove(playerToMove);
         changeTurn();
 
     }
@@ -70,18 +62,14 @@ public class ExecuteGame {
 
     private void checkWin(){
 
-        if(board.gameWon()) {
-            if (playerToMove == PlayerToken.PLAYER1)
-                out.print(player1.getName());
+        if(board.gameWon())
+          out.println (playerToMove.getName() + " wins!!");
 
-            else
-                out.print(player2.getName());
-        }
-
-        out.println(" wins!!");
     }
+
+
     private void changeTurn() {
-        playerToMove = (playerToMove == PlayerToken.PLAYER1) ? PlayerToken.PLAYER2 : PlayerToken.PLAYER1;
+        playerToMove = (playerToMove.equals(player1)) ? player2 : player1;
     }
 
 
