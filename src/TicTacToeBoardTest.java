@@ -2,10 +2,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class TicTacToeBoardTest {
 
@@ -29,12 +32,13 @@ public class TicTacToeBoardTest {
     }
 
     @Test
-    public void testRenderRow(){
+    public void getFreeSpace() throws IOException {
 
-
+       when(reader.readLine()).thenReturn("1");
+       game.makeMove();
+        assertEquals(board.getFreeSpace(), 2);
 
     }
-
 
 
 

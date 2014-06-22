@@ -21,7 +21,6 @@ public class Player {
 
         this.out = out;
         this.reader = reader;
-
     }
 
 
@@ -40,7 +39,7 @@ public class Player {
     public boolean equals(Object _otherPlayer){
         Player otherPlayer = (Player)_otherPlayer;
 
-        return name.equals(((Player) otherPlayer).getName()) && piece.equals(otherPlayer.getPiece());
+        return name.equals( otherPlayer.getName()) && piece.equals(otherPlayer.getPiece());
 
     }
 

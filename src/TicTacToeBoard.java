@@ -8,22 +8,21 @@ import java.util.*;
  */
 public class TicTacToeBoard{
 
-    private Set<Integer> player1;
-    private Set<Integer> player2;
-
     private Map<Integer, String[]> winningCombinations;
 
-    private List<String> board;
+    private String[] board;
     private boolean gameWon;
 
     public final int NUMBEROFSPACES = 10;
     public TicTacToeBoard(){
 
-        player1 = new HashSet<Integer>();
-        player2 = new HashSet<Integer>();
+
+        board = new String[NUMBEROFSPACES];
+
+        for(int space = 0; space < NUMBEROFSPACES; space++)
+            board[space] = " ";
 
 
-        board = new ArrayList<String>(NUMBEROFSPACES);
         gameWon = false;
 
         winningCombinations = new HashMap<Integer, String[]>();
@@ -47,100 +46,89 @@ public class TicTacToeBoard{
     public boolean gameWon(){
         return gameWon;
     }
+
     public boolean boardFull(){
 
-        return ! ( player1.size() + player2.size() < 9);
+        for(int space = 1; space < NUMBEROFSPACES; space++)
+            if (board[space].equals(" "))
+                return false;
+
+        return true;
     }
 
     public String getBoard(){
 
-       String board = getRow(1) + '\n' + ("_____") + '\n' + getRow(2) + '\n' + ("_____") + '\n' + getRow(3) +'\n';
-       return board;
+
+
+        String boardRepresentation =     board[1] + "|" + board[2] + "|" + board[3] + '\n' +
+                                            ("_____") + '\n' +
+                                         board[4] + "|" + board[5] + "|" + board[6] + '\n' +
+                                                    ("_____") + '\n' +
+                                         board[7] + "|" + board[8] + "|" + board[9];
+
+
+
+
+
+
+       return boardRepresentation;
 
     }
 
-    private String getRow(int rowNumber){
-
-        int space = rowNumber*3-2;
-
-        String row = getSpace(space) + "|" + getSpace(space+1) + "|" + getSpace(space+2);
-
-        return row;
-
-
-
-    }
-
-
-    private String getSpace(int space){
-
-        if(player1.contains(new Integer(space)))
-            return "X";
-
-        else if(player2.contains(new Integer(space)))
-            return "O";
-
-        else return " ";
-
-
-    }
 
     public boolean moveIsValid(Integer attemptedMove){
 
-        return !(player1.contains(attemptedMove) || player2.contains(attemptedMove));
+        int move = attemptedMove.intValue();
+        return board[move].equals(" ");
+
     }
 
     public void addPiece(Player player, Integer move){
 
         int space = move.intValue();
 
-        board.add(space, player.getPiece());
-        checkWin(player, move);
+        board[space] = player.getPiece();
+        gameWon =  checkWin(player, move);
 
 
-/*
-        if(player.getName().equals("Player 1") ) {
-            player1.add(move);
-            gameWon = checkWin(player, move);
-        }
 
-
-        else{
-            player2.add(move);
-            gameWon = checkWin(player, move);
-        }*/
     }
 
 
     private boolean checkWin(Player player, Integer move){
 
-        String piece = player.getPiece();
         String possibleWins[] = winningCombinations.get(move);
 
 
-        for(String winningCombo : possibleWins){
-
-        }
-
-       /* for(String winningCombo : possibleWins) {
-            if (checkPlayersList(player, winningCombo))
-                return true;
-        }*/
-
-
+        for(String winningCombo : possibleWins)
+          if(checkBoard(player, winningCombo))
+              return true;
 
 
         return false;
     }
 
-    private boolean checkPlayersList(Player player, String winningCombo) {
-
-        if(player.getName().equals("Player 1"))
-            return player1.contains(new Integer(winningCombo.substring(0,1))) && player1.contains(new Integer(winningCombo.substring(1,2)));
+    private boolean checkBoard(Player player, String winningCombo){
 
 
-        else
-            return player2.contains(new Integer(winningCombo.substring(0,1))) && player2.contains(new Integer(winningCombo.substring(1,2)));
+        String piece = player.getPiece();
+
+        int firstPosition = Integer.parseInt(winningCombo.substring(0,1));
+        int secondPosition = Integer.parseInt(winningCombo.substring(1,2));
+
+
+        return board[firstPosition].equals(piece) && board[secondPosition].equals(piece);
+
+    }
+
+
+    public int getFreeSpace(){
+
+        for(int position = 1; position < board.length; position++)
+            if(board[position].equals(" "))
+                return position;
+
+    return -1;
     }
 
 
