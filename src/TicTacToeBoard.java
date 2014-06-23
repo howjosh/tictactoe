@@ -37,12 +37,46 @@ public class TicTacToeBoard{
         winningCombinations.put(new Integer(8), new String[]{"79", "25"});
         winningCombinations.put(new Integer(9), new String[]{"78", "36","15"});
 
+    }
+
+    public boolean isSpaceEmpty(int space){
+
+        return board[space].equals(" ");
+
+    }
+    public Map getWinningCombinations(){
+        return winningCombinations;
+    }
+
+    public Set<Integer> getEmptySpaces(){
+        Set<Integer> emptySpaces = new HashSet<Integer>();
+
+        for(int space = 1; space < board.length; space++)
+            if(board[space].equals(" "))
+                emptySpaces.add(new Integer(space));
+
+
+
+
+        return emptySpaces;
+
+    }
+
+    public Set<Integer> getOpponentsMoves(String piece){
+        Set<Integer> opponentsMoves = new HashSet<Integer>();
+
+        for(int space = 1; space < board.length; space++)
+            if(!board[space].equals(piece) && !board[space].equals(" "))
+                opponentsMoves.add(new Integer(space));
+
+
+
+
+        return opponentsMoves;
 
 
 
     }
-
-
     public boolean gameWon(){
         return gameWon;
     }

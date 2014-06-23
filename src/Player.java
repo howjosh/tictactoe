@@ -9,11 +9,11 @@ import java.util.Set;
  */
 public class Player {
 
-    private String piece;
-    private String name;
+    protected String piece;
+    protected String name;
 
-    private PrintStream out;
-    private BufferedReader reader;
+    protected PrintStream out;
+    protected BufferedReader reader;
 
     public Player(String piece, String name, PrintStream out, BufferedReader reader){
         this.piece = piece;
